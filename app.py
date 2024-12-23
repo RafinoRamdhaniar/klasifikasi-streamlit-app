@@ -6,7 +6,7 @@ from PIL import Image, ImageOps
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model('MobileNetV2_model.keras')
+    model = tf.keras.models.load_model('MobileNet.h5')
     return model
 
 def preprocess_image(image, target_size):
