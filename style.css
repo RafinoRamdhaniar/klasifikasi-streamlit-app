@@ -1,0 +1,19 @@
+.center {
+    text-align: center;
+}
+
+.center img {
+    display: block;
+    margin: 0 auto;
+}
+
+.center h1 {
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.center p {
+    font-size: 1rem;
+    color: #666666;
+}
