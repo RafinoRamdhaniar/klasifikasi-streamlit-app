@@ -6,14 +6,14 @@ from PIL import Image, ImageOps
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model('MobileNet.h5')
+    model = tf.keras.models.load_model('Model_Coba_New.h5', compile=False)
     return model
 
 def preprocess_image(image, target_size):
     image = ImageOps.fit(image, target_size, Image.Resampling.LANCZOS)
     image = np.asarray(image)
     image = image / 255.0
-    image = np.expand_dims(image, axis=0)
+    image = np.expand_dims(image, axis=0)  # (1, 224, 224, 3)
     return image
 
 def predict_image(model, image):
@@ -69,11 +69,11 @@ def main():
         predictions = predict_image(model, image)
 
         # Display result as text
-        if predictions == 1:
-            st.write("Kayu Tidak Layak")
+        prob = predictions[0][0]  # hasil sigmoid
+        if prob > 0.5:
+            st.error(f"Kayu Tidak Layak (probabilitas: {prob:.2f})")
         else:
-            st.write("Kayu Layak")
-
+            st.success(f"Kayu Layak (probabilitas: {1-prob:.2f})")
 
 if __name__ == "__main__":
     main()
